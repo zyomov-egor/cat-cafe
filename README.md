@@ -22,7 +22,7 @@ cubes: 1 5 3
 George: выбирает 5
 Dmitry: выбирает 3
 central cube: 1
-George: 5-место, 1-предмет
+George: 5-место, 1-предмет(можно выводить таблицу с данными о заполнении башен)
 Dmitry: 1-место, 3-предмет
 -----
 cubes: 6 3 2
@@ -59,8 +59,10 @@ Dmitry WIN!!!
 ```
 ## Пример save-файла
 ```
-{"cubes":"1 5 3",
- "players":[{"name":"George", "choose":5},{"name":"Dmitry", "choose":3}],
- "first_player":"George"
+{
+  "cubes":"1 5 3",
+  "players":[{"name":"George", "choose":5, (можно выводить таблицу с данными о заполнении башен)},
+             {"name":"Dmitry", "choose":3, (можно выводить таблицу с данными о заполнении башен)}],
+  "first_player":"George"
 }
 ```
