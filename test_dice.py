@@ -17,7 +17,7 @@ def test_save():
     with open('data1', 'r') as file:
         a = json.load(file)
     assert a == {"current_side":c.current_side}
-    assert type(a)
+    assert type(a) == dict
 
 def test_load():
     c = Dice()
