@@ -31,6 +31,7 @@ def test_score1():
     a.put(1, 5, 2)
     assert a.score_1() == 4
     assert type(a.score_1()) == int
+
 def test_score2():
     pass
 
