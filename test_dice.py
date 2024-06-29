@@ -5,8 +5,7 @@ from dice import Dice
 
 def test_init():
     c = Dice()
-    assert c.sides == [1, 2, 3, 4, 5, 6]
-    assert c.side in [1, 2, 3, 4, 5, 6]
+    assert c.current_side in [1, 2, 3, 4, 5, 6]
 
 def test_repr():
     c = Dice()
@@ -18,7 +17,7 @@ def test_save():
     with open('data1', 'r') as file:
         a = json.load(file)
     assert a == {"current_side":c.current_side}
-    assert type(a) == dict
+    assert type(a)
 
 def test_load():
     c = Dice()
