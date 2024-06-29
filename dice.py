@@ -1,23 +1,23 @@
+import json
 from random import randint
+SIDES = [1, 2, 3, 4, 5, 6]
 class Dice():
     def __init__(self):
-        self.sides = [1, 2, 3, 4, 5, 6]
-        self.side = self.sides[randint(0, 5)]
+        self.current_side = SIDES[randint(0, 5)]
 
     def __repr__(self):
         return str(self.side)
 
     def roll(self):
-        return Dice()
+        self.current_side = SIDES[randint(0, 5)]
 
     def save(self):
-        pass
+        with open('data1', 'w') as file:
+            json.dump({"current_side":self.current_side}, file)
+            return {"current_side":self.current_side}
 
-    def load(self):
-        pass
-
-c1 = Dice()
-c2 = Dice()
-c3 = Dice()
-print(c1, c1.roll())
-
+    @staticmethod
+    def load():
+        with open('data1', 'r') as file:
+            s = json.load(file)
+        return s["current_side"]

@@ -1,3 +1,5 @@
+import json
+
 from dice import Dice
 
 
@@ -10,7 +12,15 @@ def test_repr():
     c = Dice()
     assert type(c) == Dice
 
-
-def test_roll():
+def test_save():
     c = Dice()
-    assert
+    c.save()
+    with open('data1', 'r') as file:
+        a = json.load(file)
+    assert a == {"current_side":c.current_side}
+    assert type(a) == dict
+
+def test_load():
+    c = Dice()
+    c.save()
+    assert c.load() == c.current_side
