@@ -97,28 +97,105 @@ class House():
         pass
 
     def score_3(self):
-        pass
+        s = 0
+        for g in self.house:
+            s += 3 * g.count(3)
+        return s
 
     def score_4(self):
         s = 0
         for i in range(5):
             w = []
-            for g in self.house:
-                w.append(g[i])
+            for k in range(len(self.house)):
+                w.append(self.house[k][i])
             while 4 in w:
-                a = [w.index(4), self.house.index(g)]
-                if (self.house[a[1]-1][a[0]] == 1 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 1 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 1 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 1 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 1 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
-                if (self.house[a[1]-1][a[0]] == 2 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 2 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 2 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 2 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 2 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
-                if (self.house[a[1]-1][a[0]] == 3 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 3 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 3 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 3 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 3 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
-                if (self.house[a[1]-1][a[0]] == 4 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 4 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 4 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 4 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 4 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
-                if (self.house[a[1]-1][a[0]] == 5 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 5 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 5 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 5 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 5 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
-                if (self.house[a[1]-1][a[0]] == 6 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 6 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 6 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 6 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 6 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
-                    s += 1
+                a = [w.index(4), i]
+                if a[1]%2 == 0:
+                    if (self.house[a[0] - 1][a[1] - 1] == 1 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 1 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 1 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 1 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 1 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] - 1][a[1] - 1] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] - 1][a[1] - 1] == 3 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 3 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 3 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 3 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 3 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 3 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] - 1][a[1] - 1] == 4 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 4 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 4 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 4 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 4 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 4 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] - 1][a[1] - 1] == 5 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 5 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 5 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 5 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 5 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 5 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] - 1][a[1] - 1] == 6 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 6 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] - 1][a[1] + 1] == 6 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 6 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 6 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                else:
+                    if (self.house[a[0] + 1][a[1] - 1] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 1 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 1 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 1 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] + 1][a[1] - 1] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] + 1][a[1] - 1] == 3 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 3 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 3 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 3 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 3 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 3 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] + 1][a[1] - 1] == 4 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 4 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 4 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 4 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 4 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 4 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] + 1][a[1] - 1] == 5 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 5 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 5 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 5 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 5 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 5 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
+                    if (self.house[a[0] + 1][a[1] - 1] == 6 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0] - 1][a[1]] == 6 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4) or (
+                            self.house[a[0] + 1][a[1] + 1] == 6 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0]][a[1] - 1] == 6 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4) or (
+                            self.house[a[0]][a[1] + 1] == 6 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4) or (
+                            self.house[a[0] + 1][a[1]] == 1 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4):
+                        s += 1
                 w[w.index(4)] = ""
         return s
 
