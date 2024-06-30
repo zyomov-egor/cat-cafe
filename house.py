@@ -100,12 +100,41 @@ class House():
         pass
 
     def score_4(self):
-        pass
+        s = 0
+        for i in range(5):
+            w = []
+            for g in self.house:
+                w.append(g[i])
+            while 4 in w:
+                a = [w.index(4), self.house.index(g)]
+                if (self.house[a[1]-1][a[0]] == 1 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 1 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 1 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 1 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 1 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                if (self.house[a[1]-1][a[0]] == 2 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 2 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 2 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 2 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 2 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                if (self.house[a[1]-1][a[0]] == 3 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 3 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 3 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 3 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 3 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                if (self.house[a[1]-1][a[0]] == 4 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 4 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 4 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 4 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 4 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                if (self.house[a[1]-1][a[0]] == 5 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 5 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 5 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 5 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 5 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                if (self.house[a[1]-1][a[0]] == 6 and 0 <= a[1]-1 <= 5 and 0 <= a[0] <= 4) or (self.house[a[1]][a[0]-1] == 6 and 0 <= a[1] <= 5 and 0 <= a[0]-1 <= 4) or (self.house[a[1]][a[0]+1] == 6 and 0 <= a[1] <= 5 and 0 <= a[0]+1 <= 4) or (self.house[a[1]+1][a[0]-1] == 6 and 0 <= a[1]+1 <= 5 and 0 <= a[0]-1 <= 4) or (self.house [a[1]+1][a[0]+1] == 6 and 0 <= a[1]+1 <= 5 and 0 <= a[0]+1 <= 4):
+                    s += 1
+                w[w.index(4)] = ""
+        return s
+
 
     def score_5(self):
-        pass
+        s = 0
+        for i in range(5):
+            w = []
+            for g in self.house:
+                w.append(g[i])
+            while 5 in w:
+                s += 6 - w.index(5)
+                w[w.index(5)] = ""
+        return s
 
-    def score(self):
+    def score_6(self):
         pass
 
     def put(self, number_tower, number_floor, number_item):
