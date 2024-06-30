@@ -14,7 +14,7 @@ def test_repr():
 def test_save():
     c = Dice()
     c.save()
-    with open('data1', 'r') as file:
+    with open('data1.json', 'r') as file:
         a = json.load(file)
     assert a == {"current_side":c.current_side}
     assert type(a) == dict
