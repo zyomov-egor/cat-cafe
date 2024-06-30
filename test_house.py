@@ -7,9 +7,6 @@ def test_init():
 def test_repr():
     pass
 
-def test_item():
-    pass
-
 def test_score():
     c = House()
     c.put(1, 1, 1)
@@ -38,7 +35,14 @@ def test_score_1():
 
 def test_score_2():
     c = House()
-    c.put()
+    c.put(1, 1, 2)
+    assert c.score_2() == 2
+    c.put(1, 2, 2)
+    assert c.score_2() == 0
+    c.put(5, 1, 2)
+    assert c.score_2() == 6
+    c.put(5, 3, 2)
+    assert c.score_2() == 16
 
 def test_score_3():
     c = House()
@@ -72,6 +76,10 @@ def test_score_4():
     assert c.score_4() == 5
     c.put(4, 6, 4)
     assert c.score_4() == 9
+    c.put(5, 2, 4)
+    assert c.score_4() == 9
+    c.put(5, 1, 4)
+    assert c.score_4() == 11
     print(c)
 
 def test_score_5():
@@ -106,10 +114,9 @@ def test_score_5():
     assert c.score_5() == 50
     print(c)
 def test_score_6():
-    pass
-
-def test_put():
-    pass
+    c = House()
+    c.put(1, 1, 6)
+    print(c.score_6())
 
 def test_save():
     pass

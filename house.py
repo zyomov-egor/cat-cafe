@@ -1,13 +1,15 @@
 SCORES = [[6, 4], [9, 5], [7, 3], [8, 4], [3, 2]]
 ITEMS = ["_домик_", "клубок_", "бабочка", "_миска_", "подушка", "_мышка_"]
+MOUSE = [2, 6, 12, 20]
 class House():
     def __init__(self):
-        self.house = [["NAN", "", "", "", "NAN"],
-                      ["", "", "", "", "NAN"],
-                      ["NAN", "", "", "", "NAN"],
-                      ["", "", "NAN", "", ""],
-                      ["", "", "", "", ""],
-                      ["", "", "", "", ""]]
+        self.house = [["NAN", "", "", "", "NAN", ""],
+                      ["", "", "", "", "NAN", ""],
+                      ["NAN", "", "", "", "NAN", ""],
+                      ["", "", "NAN", "", "", ""],
+                      ["", "", "", "", "", ""],
+                      ["", "", "", "", "", ""],
+                      ["", "", "", "", "", ""]]
 
     def item(self, i, g):
         if type(self.house[i][g]) == int:
@@ -83,8 +85,8 @@ class House():
         s = 0
         for i in range(5):
             w = []
-            for g in self.house:
-                w.append(g[i])
+            for g in range(len(self.house)-1):
+                w.append(self.house[g][i])
             if "" in w:
                 s += 0
             elif 1 in w:
@@ -94,7 +96,45 @@ class House():
         return s
 
     def score_2(self):
-        pass
+        n = 0 #количество смежных
+        d = 0 #количество клубков
+        for i in self.house:
+            d += i.count(2)
+        for i in range(5):
+            w = []
+            for k in range(len(self.house)-1):
+                w.append(self.house[k][i])
+            while 2 in w:
+                a = [w.index(2), i]
+                if a[1] % 2 == 0:
+                    if self.house[a[0] - 1][a[1] - 1] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] - 1 <= 4:
+                        n += 1
+                    if self.house[a[0] - 1][a[1]] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4:
+                        n += 1
+                    if self.house[a[0] - 1][a[1] + 1] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] + 1 <= 4:
+                        n += 1
+                    if self.house[a[0]][a[1] - 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4:
+                        n += 1
+                    if self.house[a[0]][a[1] + 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4:
+                        n += 1
+                    if self.house[a[0] + 1][a[1]] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4:
+                        n += 1
+                else:
+                    if self.house[a[0] + 1][a[1] - 1] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] - 1 <= 4:
+                        n += 1
+                    if self.house[a[0] - 1][a[1]] == 2 and 0 <= a[0] - 1 <= 5 and 0 <= a[1] <= 4:
+                        n += 1
+                    if self.house[a[0] + 1][a[1] + 1] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] + 1 <= 4:
+                        n += 1
+                    if self.house[a[0]][a[1] - 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] - 1 <= 4:
+                        n += 1
+                    if self.house[a[0]][a[1] + 1] == 2 and 0 <= a[0] <= 5 and 0 <= a[1] + 1 <= 4:
+                        n += 1
+                    if self.house[a[0] + 1][a[1]] == 2 and 0 <= a[0] + 1 <= 5 and 0 <= a[1] <= 4:
+                        n += 1
+                w[w.index(2)] = ""
+        s = d * 2 * (d - n)
+        return s
 
     def score_3(self):
         s = 0
@@ -106,7 +146,7 @@ class House():
         s = 0
         for i in range(5):
             w = []
-            for k in range(len(self.house)):
+            for k in range(len(self.house)-1):
                 w.append(self.house[k][i])
             while 4 in w:
                 a = [w.index(4), i]
@@ -212,7 +252,14 @@ class House():
         return s
 
     def score_6(self):
-        pass
+        s = 0
+        w = []
+        for i in range(5):
+            for k in range(6):
+                if self.house[k][i] == 6:
+                    a = [k, i]
+                    w.append(a)
+        return w
 
     def put(self, number_tower, number_floor, number_item):
         self.house[6 - number_floor][number_tower - 1] = number_item
