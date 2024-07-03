@@ -1,3 +1,4 @@
+from copy import copy
 SCORES = [[6, 4], [9, 5], [7, 3], [8, 4], [3, 2]]
 ITEMS = ["_домик_", "клубок_", "бабочка", "_миска_", "подушка", "_мышка_"]
 MOUSE = [2, 6, 12, 20]
@@ -11,8 +12,7 @@ CONNECTIONS = [BOT, TOP, RBOT, LBOT, RTOP, LTOP]
 class House():
     def __init__(self, house=None):
         if house == None:
-            self.house = [["NAN", "", "NAN", "", "NAN"],
-                          ["NAN", "NAN", "", "NAN", "NAN"],
+            self.house = [["NAN", "NAN", "", "NAN", "NAN"],
                           ["NAN", "", "NAN", "", "NAN"],
                           ["", "NAN", "", "NAN", "NAN"],
                           ["NAN", "", "NAN", "", "NAN"],
@@ -22,7 +22,8 @@ class House():
                           ["NAN", "", "NAN", "", "NAN"],
                           ["", "NAN", "", "NAN", ""],
                           ["NAN", "", "NAN", "", "NAN"],
-                          ["", "NAN", "", "NAN", ""]]
+                          ["", "NAN", "", "NAN", ""],
+                          ["NAN", "", "NAN", "", "NAN"]]
         else:
             self.house = house
 
@@ -36,24 +37,24 @@ class House():
         return f"""  
                                      7/3
                          9/5          |           8/4
-           6/4           |         6_{self.item(1, 2)}_      |
-            |         6_{self.item(0, 1)}_      |         6_{self.item(0, 3)}_
-         5_{self.item(3, 0)}_      |         5_{self.item(3, 2)}_      |
-            |         5_{self.item(2, 1)}_      |         5_{self.item(2, 3)}_
-            |            |         4_{self.item(5, 2)}_      |           3/2
-            |         4_{self.item(4, 1)}_      |         4_{self.item(4, 3)}_      |
-         3_{self.item(7, 0)}_      |            |            |         3_{self.item(7, 4)}_
-            |         3_{self.item(6, 1)}_      |         3_{self.item(6, 3)}_      |
-         2_{self.item(9, 0)}_      |         2_{self.item(9, 2)}_      |         2_{self.item(9, 4)}_
-            |         2_{self.item(8, 1)}_      |         2_{self.item(8, 3)}_      |
-         1_{self.item(11, 0)}_      |         1_{self.item(11, 2)}_      |         1_{self.item(11, 4)}_
-            |         1_{self.item(10, 1)}_      |         1_{self.item(10, 3)}_      |
+           6/4           |         6_{self.item(0, 2)}_      |
+            |         6_{self.item(1, 1)}_      |         6_{self.item(1, 3)}_
+         5_{self.item(2, 0)}_      |         5_{self.item(2, 2)}_      |
+            |         5_{self.item(3, 1)}_      |         5_{self.item(3, 3)}_
+            |            |         4_{self.item(4, 2)}_      |           3/2
+            |         4_{self.item(5, 1)}_      |         4_{self.item(5, 3)}_      |
+         3_{self.item(6, 0)}_      |            |            |         3_{self.item(6, 4)}_
+            |         3_{self.item(7, 1)}_      |         3_{self.item(7, 3)}_      |
+         2_{self.item(8, 0)}_      |         2_{self.item(8, 2)}_      |         2_{self.item(8, 4)}_
+            |         2_{self.item(9, 1)}_      |         2_{self.item(9, 3)}_      |
+         1_{self.item(10, 0)}_      |         1_{self.item(10, 2)}_      |         1_{self.item(10, 4)}_
+            |         1_{self.item(11, 1)}_      |         1_{self.item(11, 3)}_      |
             |            |            |            |            |
             =            =            =            =            =
         """
 
     def put(self, number_tower, number_floor, number_item):
-        if number_tower % 2 == 0:
+        if number_tower % 2 == 1:
             if self.house[12 - 2*number_floor][number_tower - 1] != "NAN":
                 self.house[12 - 2*number_floor][number_tower - 1] = number_item
             else:
@@ -86,13 +87,17 @@ class House():
                 if self.house[row][col] != 2:
                     continue
                 total_balls += 1
+                isolated = True
                 for connection in CONNECTIONS:
                     drow = connection[0]
                     dcol = connection[1]
-                    if self._position(row + drow, col + dcol):
-                        if self.house[row + drow][col + dcol] == 2:
-                            continue
-                total_isolated_balls += 1
+                    if not self._position(row + drow, col + dcol):
+                        continue
+                    if self.house[row + drow][col + dcol] != 2:
+                        continue
+                    isolated = False
+                if isolated:
+                    total_isolated_balls += 1
 
         return total_balls * total_isolated_balls
 
@@ -114,34 +119,37 @@ class House():
                     dcol = connection[1]
                     if self._position(row + drow, col + dcol):
                         items.add(self.house[row + drow][col + dcol])
-                items.remove("")
-                s += len(items)
+                    if "" in items:
+                        items.remove("")
+                    if "NAN" in items:
+                        items.remove("NAN")
+                s += len(set(items))
         return s
 
 
     def score_pillow5(self):
-        # s = 0
-        # for i in range(5):
-        #     w = []
-        #     for g in self.house:
-        #         w.append(g[i])
-        #     while 5 in w:
-        #
-        #         s += 6 - w.index(5)
-        #         w[w.index(5)] = ""
-        # return s
         s = 0
         for i in range(len(self.house)):
             for g in self.house[i]:
                 if g == 5:
-                    if self.house[i].index(g) % 2 == 1:
+                    if self.house[i].index(g) % 2 == 0:
                         s += (12 - i)/2
                     else:
                         s += (13 - i)/2
         return s
 
     def score_mouse6(self):
-        pass
+        s = 0
+        for row in range(len(self.house)):
+            for col in range(len(self.house[row])):
+                if self.house[row][col] != 6:
+                    continue
+                mice = self.find_mice_complex(row, col, [(row, col)])
+                if len(mice) > 4:
+                    s += 20/len(mice)
+                else:
+                    s += 1 + len(mice)
+        return round(s)
 
     def score(self):
         s = 0
@@ -154,11 +162,22 @@ class House():
         return s
 
     def _position(self, x, y):
-            if 0 <= x <= 11 and 0 <= y <= 4 :
-                self.house[x][y]
+            if 0 <= x <= 11 and 0 <= y <= 4:
                 return True
             else:
                 return False
+
+
+    def find_mice_complex(self, row, col, mice):
+        for drow, dcol in CONNECTIONS:
+            if self._position(row + drow, col + dcol):
+                if self.house[row + drow][col + dcol] != 6:
+                    continue
+                if (row + drow, col + dcol) in mice:
+                    continue
+                mice.append((row + drow, col + dcol))
+                self.find_mice_complex(row + drow, col + dcol, mice)
+        return mice
 
     def save(self):
         return self.house
