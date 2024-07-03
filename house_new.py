@@ -56,12 +56,18 @@ class House():
     def put(self, number_tower, number_floor, number_item):
         if number_tower % 2 == 1:
             if self.house[12 - 2*number_floor][number_tower - 1] != "NAN":
-                self.house[12 - 2*number_floor][number_tower - 1] = number_item
+                if self.house[12 - 2 * number_floor][number_tower - 1] in [1, 2, 3, 4, 5, 6]:
+                    print('Это место уже занято!')
+                else:
+                    self.house[12 - 2*number_floor][number_tower - 1] = number_item
             else:
                 print(f'Такого места нет!')
         else:
             if self.house[13 - 2 * number_floor][number_tower - 1] != "NAN":
-                self.house[13 - 2 * number_floor][number_tower - 1] = number_item
+                if self.house[13 - 2 * number_floor][number_tower - 1] in [1, 2, 3, 4, 5, 6]:
+                    print('Это место уже занято!')
+                else:
+                    self.house[13 - 2 * number_floor][number_tower - 1] = number_item
             else:
                 print(f'Такого места нет!')
 

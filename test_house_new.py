@@ -44,6 +44,8 @@ def test_put():
     assert c.house[8][2] == 2
     c.put(2, 6, 5)
     assert c.house[1][1] == 5
+    c.put(2, 6, 2)
+    assert c.house[1][1] == 5
     print(c)
 
 
