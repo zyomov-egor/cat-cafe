@@ -104,7 +104,7 @@ class Gamestate():
                    [Dice.load(dd) for dd in data['dices']])
 
 if __name__ == '__main__':
-    s = Player('Rick', is_human=True)
+    s = Player('Rick')
     a = Player('Morty')
     c = Gamestate([a, s], 0)
     c.run()

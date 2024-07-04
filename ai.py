@@ -9,14 +9,16 @@ class AI():
         return choice(dice_list)
 
     def choose_action(self, house: House, dices=[int, int]):
-        tower = randint(1,5)
-        if house._get(tower, dices[0]) == "":
-            return tower, dices[0], dices[1]
-        elif house._get(tower, dices[1]) == "":
-            return tower, dices[1], dices[0]
-        else:
-            return None
-
+        tow_n = [1, 2, 3, 4, 5]
+        while tow_n != []:
+            tower = choice(tow_n)
+            if house._get(tower, dices[0]) == "":
+                return tower, dices[0], dices[1]
+            elif house._get(tower, dices[1]) == "":
+                return tower, dices[1], dices[0]
+            else:
+                tow_n.remove(tower)
+        return None
 # class Answer():
 #     def __init__(self, tower, floor, item):
 #         self.tower = tower
