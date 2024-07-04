@@ -48,6 +48,19 @@ def test_put():
     assert c.house[1][1] == 5
     print(c)
 
+def test_get():
+    c = House()
+    c.put(1, 1, 1)
+    assert c._get(1, 1) == 1
+    c.put(3, 3, 1)
+    assert c._get(3, 3) == "NAN"
+    c.put(3, 2, 2)
+    assert c._get(3, 2) == 2
+    c.put(2, 6, 5)
+    assert c._get(2, 6) == 5
+    c.put(2, 6, 2)
+    assert c._get(2, 6) == 5
+    print(c)
 
 def test_score():
     c = House()
