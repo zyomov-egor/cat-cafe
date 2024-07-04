@@ -153,6 +153,26 @@ def test_score_bowl4():
     assert c.score_bowl4() == 11
     print(c)
 
+def test_score_bowl():
+    c = House()
+    c.put(3, 4, 4)
+    assert c.score_bowl() == 0
+    c.put(2, 5, 5)
+    assert c.score_bowl() == 0
+    c.put(3, 5, 4)
+    assert c.score_bowl() == 1
+    c.put(4, 5, 4)
+    assert c.score_bowl() == 3
+    c.put(4, 6, 4)
+    assert c.score_bowl() == 5
+    c.put(3, 6, 4)
+    assert c.score_bowl() == 7
+    c.put(2, 4, 4)
+    assert c.score_bowl() == 8
+    c.put(4, 4 , 4)
+    assert c.score_bowl() == 10
+    print(c)
+
 def test_score_pillow5():
     c = House()
     c.put(1, 1, 5)

@@ -8,7 +8,7 @@ class AI():
         """выбирает произвоьный кубик из трех или двух в зависимости от хода, i_player = True если игрок выбирает кубик первым"""
         return choice(dice_list)
 
-    def choose_action(self, house: House=None, dices=[int, int]):
+    def choose_action(self, house: House, dices=[int, int]):
         tower = randint(1,5)
         if house._get(tower, dices[0]) == "":
             return tower, dices[0], dices[1]

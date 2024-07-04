@@ -5,9 +5,6 @@ class GameInteraction:
     def __repr__(self):
         pass
 
-    def run(self):
-        pass
-
     def load(self, data):
         pass
 

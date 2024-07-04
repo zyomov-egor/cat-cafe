@@ -132,6 +132,21 @@ class House():
                 s += len(set(items))
         return s
 
+    def score_bowl(self):
+        s = 0
+        for row in range(len(self.house)):
+            for col in range(len(self.house[row])):
+                if self.house[row][col] != 4:
+                    continue
+                for connection in CONNECTIONS:
+                    drow = connection[0]
+                    dcol = connection[1]
+                    if self._position(row + drow, col + dcol):
+                        if drow > 0:
+                            continue
+                        if self.house[row + drow][col + dcol] == 4:
+                            s += 1
+        return s
 
     def score_pillow5(self):
         s = 0

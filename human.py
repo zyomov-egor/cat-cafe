@@ -8,11 +8,10 @@ class Human():
             print(dice_list)
             dice = int(input('Выберите 1 кубик: '))
             if dice in dice_list:
-                dice_list.remove(dice)
                 return dice
             else:
                 print('Такого кубика нет!')
-    def choose_action(self, house: House=None, dices=[int, int]):
+    def choose_action(self, house: House, dices=[int, int]):
         a = f'Ваши кубики: {dices[0]}, {dices[1]}'
         while True:
             while True:

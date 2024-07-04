@@ -1,12 +1,15 @@
 from ai import AI
-from dice import Dice
 from house_new import House
 from human import Human
 
 class Player():
-    def __init__(self, name: str, house: House = None, is_human: bool=False):
+    def __init__(self, name: str, house: House = None, dice = None, is_human: bool=False):
         self.name = name
-        self.tower_lst = house
+        if house != None:
+            self.tower_lst = house
+        else:
+            self.tower_lst = House()
+        self.choosen_dice = dice
         if is_human == True:
             self.actor = Human()
         else:
