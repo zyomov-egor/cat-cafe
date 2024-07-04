@@ -6,29 +6,32 @@ class Human():
     def choose_dice(self, dice_list: list[int]):
         while True:
             print(dice_list)
-            res = input('Выберите 1 кубик: ')
-            dice = Dice.load(res)
+            dice = int(input('Выберите 1 кубик: '))
             if dice in dice_list:
                 dice_list.remove(dice)
                 return dice
             else:
                 print('Такого кубика нет!')
     def choose_action(self, house: House=None, dices=[int, int]):
+        a = f'Ваши кубики: {dices[0]}, {dices[1]}'
         while True:
             while True:
-                tower = int(input('выберите номер башни башни: '))
+                tower = int(input('Выберите номер башни: '))
                 if not(1 <= tower <= 5):
                     print('Такой башни нет!')
                     continue
                 break
             while True:
-                floor = int(input('выберите какой кубик отвечает за этаж башни: '))
+                floor = int(input(f'Выберите какой кубик отвечает за этаж башни ({a}): '))
                 if floor not in dices:
                     print('Такого кубика нет!')
                     continue
                 break
-            item = dices.remove(floor)[0]
-            if house._get(tower, dices[0]) == "":
+            if dices.index(floor) == 1:
+                item = dices[0]
+            else:
+                item = dices[1]
+            if house._get(tower, floor) == "":
                 return tower, floor, item
             else:
                 ans = input('Сделайте другой выбор или пропустите ход \nВы хотите пропустить ход? ')
@@ -37,6 +40,9 @@ class Human():
                 else:
                     continue
 
-
-
-
+if __name__ == '__main__':
+    c = Human()
+    a = House()
+    c.choose_dice([2, 4, 4])
+    a.put(1, 3, 1)
+    c.choose_action(a, [3, 5])
