@@ -8,6 +8,9 @@ class Gamestate():
                 dices.append(Dice())
         self.dices = dices
 
+    def run(self):
+        pass
+
     def current_player(self):
         return self.players[self.current_player_index]
 
@@ -15,8 +18,33 @@ class Gamestate():
         n = len(self.players)
         self.current_player_index = (self.current_player_index + 1) % n
 
-    def roll_dice(self):
+    def rolled_dice(self):
         pass
+
+    def is_win_condition(self):
+        for player in self.players:
+            full_tower = 0
+            for col in range(5):
+                w = []
+                for row in range(len(player.tower_lst)):
+                    w.append(player.tower_lst[row][col])
+                if "" not in w:
+                    full_tower += 1
+            if full_tower == 3:
+                return True
+        return False
+
+    def win_player(self):
+        lst_player = []
+        for player in self.players:
+            lst_player.append({
+                "pl_cls": player,
+                "name": player.name,
+                "score": player.tower_lst.score()
+            })
+        sorted(lst_player, key = lambda x: x["score"])
+        return f'Побеждает: {lst_player[-1]["name"]}, с количеством очков: {lst_player[-1]["score"]}'
+
 
     def save(self):
         return {
