@@ -28,10 +28,14 @@ class Gamestate():
         self.cube1 = Dice()
         self.cube2 = Dice()
         self.cube3 = Dice()
-        self.cube1.roll()
-        self.cube2.roll()
-        self.cube3.roll()
-        return [self.cube1.current_side, self.cube2.current_side, self.cube3.current_side]
+        self.lst_cubes = [self.cube1.current_side, self.cube2.current_side, self.cube3.current_side]
+        return self.lst_cubes
+
+    def choose_dice(self):
+        pass
+
+    def choose_action(self):
+        pass
 
     def is_win_condition(self):
         for player in self.players:
