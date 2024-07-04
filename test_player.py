@@ -1,6 +1,7 @@
 from dice import Dice
 from house_new import House
 from player import Player
+from human import Human
 
 
 def test_init():
@@ -72,7 +73,46 @@ def test_choose_action_ai():
     assert c.choose_action([2, 6])[2] in [1, 2, 3, 4, 5, 6]
 
 def test_save():
-    pass
+    c = Player('Alex', House())
+    assert c.save()['name'] == 'Alex'
+    c.tower_lst.put(1, 1, 1)
+    assert c.save()['house'] == [["NAN", "NAN", "", "NAN", "NAN"],
+                                  ["NAN", "", "NAN", "", "NAN"],
+                                  ["", "NAN", "", "NAN", "NAN"],
+                                  ["NAN", "", "NAN", "", "NAN"],
+                                  ["NAN", "NAN", "", "NAN", "NAN"],
+                                  ["NAN", "", "NAN", "", "NAN"],
+                                  ["", "NAN", "NAN", "NAN", ""],
+                                  ["NAN", "", "NAN", "", "NAN"],
+                                  ["", "NAN", "", "NAN", ""],
+                                  ["NAN", "", "NAN", "", "NAN"],
+                                  [1, "NAN", "", "NAN", ""],
+                                  ["NAN", "", "NAN", "", "NAN"]]
+    assert c.save()['is_human'] == False
+    s = Player('Artem', House(), is_human=True)
+    assert s.save()['name'] == 'Artem'
+    s.tower_lst.put(1, 1, 1)
+    assert s.save()['house'] == [["NAN", "NAN", "", "NAN", "NAN"],
+                                 ["NAN", "", "NAN", "", "NAN"],
+                                 ["", "NAN", "", "NAN", "NAN"],
+                                 ["NAN", "", "NAN", "", "NAN"],
+                                 ["NAN", "NAN", "", "NAN", "NAN"],
+                                 ["NAN", "", "NAN", "", "NAN"],
+                                 ["", "NAN", "NAN", "NAN", ""],
+                                 ["NAN", "", "NAN", "", "NAN"],
+                                 ["", "NAN", "", "NAN", ""],
+                                 ["NAN", "", "NAN", "", "NAN"],
+                                 [1, "NAN", "", "NAN", ""],
+                                 ["NAN", "", "NAN", "", "NAN"]]
+    assert s.save()['is_human'] == True
+
 
 def test_load():
-    pass
+    c = Player('Alex', House())
+    c.tower_lst.put(1, 1, 1)
+    assert type(c.load(c.save())) == Player
+    s = c.save()
+    s['is_human'] = True
+    assert type(c.load(s)) == Player
+    assert type(c.load(s).actor) == Human
+
