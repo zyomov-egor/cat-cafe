@@ -1,8 +1,7 @@
 from ai import AI
 from dice import Dice
-from house import House
+from house_new import House
 from human import Human
-from playerinteractions import PlayerInteraction
 DICES = [Dice(), Dice(), Dice()]
 
 class Player():
@@ -20,8 +19,8 @@ class Player():
         return self.actor.choose_dice(dices)
 
 
-    def choose_action(self):
-        return self.actor.choose_action(self.tower_lst, self.dices)
+    def choose_action(self, dices=[int, int]):
+        return self.actor.choose_action(self.tower_lst, dices)
 
     def to_dict(self):
         return {
