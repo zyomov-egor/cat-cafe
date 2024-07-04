@@ -1,3 +1,9 @@
+import json
+
+from dice import Dice
+from player import Player
+
+
 class Gamestate():
     def __init__(self, players, current_player: int = 0, dices = None):
         self.players = players
@@ -19,7 +25,13 @@ class Gamestate():
         self.current_player_index = (self.current_player_index + 1) % n
 
     def rolled_dice(self):
-        pass
+        self.cube1 = Dice()
+        self.cube2 = Dice()
+        self.cube3 = Dice()
+        self.cube1.roll()
+        self.cube2.roll()
+        self.cube3.roll()
+        return [self.cube1.current_side, self.cube2.current_side, self.cube3.current_side]
 
     def is_win_condition(self):
         for player in self.players:
@@ -58,3 +70,11 @@ class Gamestate():
         return cls([Player.load(pd) for pd in data['players']],
                    data['current_player_index'],
                    [Dice.load(dd) for dd in data['dices']])
+
+
+class GameStage():
+    ROLL_DICE = 1
+    CHOOSE_DICE = 2
+    CHOOSE_ACTION = 3
+    NEXT_ROUND = 4
+    END_GAME = 5
