@@ -2,7 +2,6 @@ from ai import AI
 from dice import Dice
 from house_new import House
 from human import Human
-DICES = [Dice(), Dice(), Dice()]
 
 class Player():
     def __init__(self, name: str, house: House = None, is_human: bool=False):
@@ -38,7 +37,4 @@ class Player():
 
     @classmethod
     def load(cls, data: dict):
-        cls.from_dict(data)
-
-if __name__ == '__main__':
-    print(type(DICES[0]))
+        return cls.from_dict(data)
