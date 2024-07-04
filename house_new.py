@@ -185,6 +185,13 @@ class House():
                 self.find_mice_complex(row + drow, col + dcol, mice)
         return mice
 
+    def _get(self, tower, floor):
+        if tower % 2 == 1:
+            return self.house[12 - 2*floor][tower - 1]
+        else:
+            return self.house[13 - 2 * floor][tower - 1]
+
+
     def save(self):
         return self.house
 
